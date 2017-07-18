@@ -17,7 +17,6 @@ if (process.env.LOCAL) {
 }
 var io = require('socket.io')(server);
 
-var roomList = {};
 
 app.get('/', function(req, res){
   console.log('get /');
@@ -30,6 +29,9 @@ server.listen(serverPort, function(){
     open('https://localhost:' + serverPort)
   }
 });
+
+var roomList = {};
+
 
 function socketIdsInRoom(name) {
   var socketIds = io.nsps['/'].adapter.rooms[name];
@@ -58,7 +60,8 @@ io.on('connection', function(socket){
 
   socket.on('join', function(name, isBroadcaster, callback){
     console.log('join', name);
-    var socketIds = socketIdsInRoom(name);
+    var socketIds = socketIdsInRoom(name, isBroadcaster); //all socket
+    console.log("SocketIDs", socketIds)
     callback(socketIds);
     socket.join(name);
     socket.room = name;
