@@ -61,6 +61,13 @@ io.on("connection", function(socket) {
     if (socket.room) {
       var isBroadcaster = _.includes(broadcasterIds,socket.id) ? true : false;
 
+      if(isBroadcaster){
+        var deteleIndex = broadcasterIds.indexOf(socket.id)
+        broadcasterIds.splice(deteleIndex,1)
+        delete roomList[socket.id]
+        io.emit('roomlists', roomList)
+      }
+
       var room = socket.room;
       io.to(room).emit("leave", socket.id, isBroadcaster);
       socket.leave(room);
@@ -83,6 +90,7 @@ io.on("connection", function(socket) {
     if (isBroadcaster) {
       broadcasterIds.push(socket.id);
       roomList[socket.id] = socket.name
+      io.emit('roomlist',roomList)
     }
   });
 
@@ -91,4 +99,6 @@ io.on("connection", function(socket) {
     var to = io.sockets.connected[data.to];
     to.emit("exchange", data);
   });
+
+  
 });

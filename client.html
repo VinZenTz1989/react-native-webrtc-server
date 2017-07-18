@@ -181,6 +181,10 @@ function leave(socketId) {
   if (video) video.remove();
 }
 
+socket.on('roomlist', function(roomList){
+  console.log('Roomlist', roomList)
+})
+
 socket.on('exchange', function(data){
   exchange(data);
 });
