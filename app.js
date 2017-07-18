@@ -35,6 +35,7 @@ var roomList = {};
 
 function socketIdsInRoom(name) {
   var socketIds = io.nsps['/'].adapter.rooms[name];
+  console.log('socketIds', socketIds)
   if (socketIds) {
     var collection = [];
     for (var key in socketIds) {
@@ -60,11 +61,11 @@ io.on('connection', function(socket){
 
   socket.on('join', function(name, isBroadcaster, callback){
     console.log('join', name);
-    var socketIds = socketIdsInRoom(name, isBroadcaster); //all socket
-    console.log("SocketIDs", socketIds)
+    var socketIds = socketIdsInRoom(name); //all socket
     callback(socketIds);
     socket.join(name);
     socket.room = name;
+    
   });
 
 
