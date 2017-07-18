@@ -19,7 +19,7 @@ if (process.env.LOCAL) {
 var io = require("socket.io")(server);
 
 app.get("/client", function(req, res) {
-  res.render(__dirname + "/client.html");
+  res.sendFile(__dirname + "/index.html");
 });
 
 app.get("/", function(req, res) {
