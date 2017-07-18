@@ -186,7 +186,7 @@ socket.on('exchange', function(data){
 });
 
 socket.on('leave', function(socketId, isBroadcaster ){
-  leave(socketId);
+  if(isBroadcaster) leave(socketId);
 });
 
 socket.on('connect', function(data) {

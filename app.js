@@ -26,6 +26,8 @@ app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
+
+
 server.listen(serverPort, function() {
   console.log("server up and running at %s port", serverPort);
   if (process.env.LOCAL) {
@@ -63,23 +65,25 @@ io.on("connection", function(socket) {
       io.to(room).emit("leave", socket.id, isBroadcaster);
       socket.leave(room);
     }
-  });
+  })
 
-  //return only broadcastId
+  //## return only broadcastId
   socket.on("join", function(name, isBroadcaster, callback) {
     console.log("join", socket.id);
 
+    //get broadcastId in the room by name
     var broadcastId = socketIdsInRoom(name).filter(function(item) {
       return _.includes(broadcasterIds, item);
     });
-    
-    if (isBroadcaster) {
-      broadcasterIds.push(socket.id);
-    }
-    console.log('BROADCAST ID', broadcastId)
-    callback(broadcastId);
+    callback(broadcastId); //send broadcastId to client
+
     socket.join(name);
     socket.room = name;
+
+    if (isBroadcaster) {
+      broadcasterIds.push(socket.id);
+      roomList[socket.id] = socket.name
+    }
   });
 
   socket.on("exchange", function(data) {
