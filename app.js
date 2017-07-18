@@ -62,7 +62,8 @@ io.on('connection', function(socket){
 
   //Should return only broadcastId
   socket.on('join', function(name, isBroadcaster, callback){
-    console.log('join', name);
+    console.log('join', socket.id);
+    
     var socketIds = socketIdsInRoom(name); //all socket
     callback(socketIds);
     socket.join(name, ()=>{
