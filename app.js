@@ -66,7 +66,7 @@ io.on('connection', function(socket){
     var socketIds = socketIdsInRoom(name); //all socket
     callback(socketIds);
     socket.join(name, ()=>{
-      console.log(socket.client)
+      console.log(socket.client.id)
     });
     socket.room = name;    
   });
