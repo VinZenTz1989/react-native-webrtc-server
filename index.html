@@ -188,7 +188,7 @@ socket.on('leave', function(socketId){
 });
 
 socket.on('connect', function(data) {
-  console.log('connect');
+  console.log('connection',socket)
   getLocalStream();
 });
 
