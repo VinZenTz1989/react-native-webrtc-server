@@ -32,6 +32,7 @@ server.listen(serverPort, function(){
 
 var roomList = {};
 
+let broadcasters = [] 
 
 function socketIdsInRoom(name) {
   var socketIds = io.nsps['/'].adapter.rooms[name];
@@ -63,7 +64,9 @@ io.on('connection', function(socket){
     console.log('join', name);
     var socketIds = socketIdsInRoom(name); //all socket
     callback(socketIds);
-    socket.join(name);
+    socket.join(name, ()=>{
+      console.log(socket.clients)
+    });
     socket.room = name;    
   });
 
