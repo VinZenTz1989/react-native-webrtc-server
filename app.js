@@ -22,11 +22,9 @@ app.get("/client", function(req, res) {
   res.sendFile(__dirname + "/client.html");
 });
 
-
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
-
 
 server.listen(serverPort, function() {
   console.log("server up and running at %s port", serverPort);
