@@ -19,8 +19,11 @@ if (process.env.LOCAL) {
 var io = require("socket.io")(server);
 
 app.get("/", function(req, res) {
-  console.log("get /");
   res.sendFile(__dirname + "/index.html");
+});
+
+app.get("/client", function(req, res) {
+  res.sendFile(__dirname + "/client.html");
 });
 
 server.listen(serverPort, function() {
