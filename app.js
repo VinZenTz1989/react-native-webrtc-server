@@ -64,13 +64,12 @@ io.on('connection', function(socket){
     var socketIds = socketIdsInRoom(name); //all socket
     callback(socketIds);
     socket.join(name);
-    socket.room = name;
-    
+    socket.room = name;    
   });
 
 
   socket.on('exchange', function(data){
-    console.log('exchange', data);
+    // console.log('exchange', data);
     data.from = socket.id;
     var to = io.sockets.connected[data.to];
     to.emit('exchange', data);
