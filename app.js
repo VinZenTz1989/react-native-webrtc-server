@@ -54,13 +54,15 @@ io.on("connection", function(socket) {
   socket.on("disconnect", function() {
     console.log("disconnect");
     if (socket.room) {
+      var isBroadcaster = _.includes(broadcasterIds,socket.id) ? true : false;
+
       var room = socket.room;
-      io.to(room).emit("leave", socket.id);
+      io.to(room).emit("leave", socket.id, isBroadcaster);
       socket.leave(room);
     }
   });
 
-  //Should return only broadcastId
+  //return only broadcastId
   socket.on("join", function(name, isBroadcaster, callback) {
     console.log("join", socket.id);
 
@@ -78,7 +80,6 @@ io.on("connection", function(socket) {
   });
 
   socket.on("exchange", function(data) {
-    // console.log('exchange', data);
     data.from = socket.id;
     var to = io.sockets.connected[data.to];
     to.emit("exchange", data);

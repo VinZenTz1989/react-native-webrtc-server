@@ -183,7 +183,8 @@ function leave(socketId) {
 socket.on('exchange', function(data){
   exchange(data);
 });
-socket.on('leave', function(socketId){
+
+socket.on('leave', function(socketId, isBroadcaster ){
   leave(socketId);
 });
 
