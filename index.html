@@ -57,7 +57,7 @@ function getLocalStream() {
 }
 
 function join(roomID) {
-  socket.emit('join', roomID, function(socketIds){
+  socket.emit('join', roomID, true, function(socketIds){
     console.log('join', socketIds);
     for (var i in socketIds) {
       var socketId = socketIds[i];
