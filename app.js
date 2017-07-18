@@ -71,7 +71,7 @@ io.on("connection", function(socket) {
     if (isBroadcaster) {
       broadcasterIds.push(socket.id);
     }
-
+    console.log('BROADCAST ID', broadcastId)
     callback(broadcastId);
     socket.join(name);
     socket.room = name;
