@@ -32,7 +32,7 @@ server.listen(serverPort, function(){
 
 var roomList = {};
 
-let broadcasters = [] 
+var broadcasters = [] 
 
 function socketIdsInRoom(name) {
   var socketIds = io.nsps['/'].adapter.rooms[name];
