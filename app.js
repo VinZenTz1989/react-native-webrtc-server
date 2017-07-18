@@ -18,13 +18,15 @@ if (process.env.LOCAL) {
 }
 var io = require("socket.io")(server);
 
+app.get("/client", function(req, res) {
+  res.sendFile(__dirname + "/client.html");
+});
+
+
 app.get("/", function(req, res) {
   res.sendFile(__dirname + "/index.html");
 });
 
-app.get("/client", function(req, res) {
-  res.sendFile(__dirname + "/client.html");
-});
 
 server.listen(serverPort, function() {
   console.log("server up and running at %s port", serverPort);
