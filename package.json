@@ -12,7 +12,8 @@
     "logs": "heroku logs --tail",
     "deploy": "git push heroku master",
     "start": "node app.js",
-    "local-start": "LOCAL=TRUE node app.js"
+    "local-start": "LOCAL=TRUE node app.js",
+    "commit": "git add . && git commit -m 'Update' && git push"
   },
   "dependencies": {
     "express": "^4.11.2",

@@ -73,7 +73,6 @@ function createPC(socketId, isOffer) {
   pcPeers[socketId] = pc;
 
   pc.onicecandidate = function (event) {
-    console.log('onicecandidate', event);
     if (event.candidate) {
       socket.emit('exchange', {'to': socketId, 'candidate': event.candidate });
     }
@@ -81,7 +80,6 @@ function createPC(socketId, isOffer) {
 
   function createOffer() {
     pc.createOffer(function(desc) {
-      console.log('createOffer', desc);
       pc.setLocalDescription(desc, function () {
         console.log('setLocalDescription', pc.localDescription);
         socket.emit('exchange', {'to': socketId, 'sdp': pc.localDescription });
@@ -90,14 +88,12 @@ function createPC(socketId, isOffer) {
   }
 
   pc.onnegotiationneeded = function () {
-    console.log('onnegotiationneeded');
     if (isOffer) {
       createOffer();
     }
   }
 
   pc.oniceconnectionstatechange = function(event) {
-    console.log('oniceconnectionstatechange', event);
     if (event.target.iceConnectionState === 'connected') {
       createDataChannel();
     }
@@ -107,7 +103,6 @@ function createPC(socketId, isOffer) {
   };
 
   pc.onaddstream = function (event) {
-    console.log('onaddstream', event);
     var element = document.createElement('video');
     element.id = "remoteView" + socketId;
     element.autoplay = 'autoplay';
@@ -184,6 +179,10 @@ function leave(socketId) {
 
 socket.on('exchange', function(data){
   exchange(data);
+});
+
+socket.on('roomList', function(roomList){
+  console.log('Room list', roomList)
 });
 
 socket.on('leave', function(socketId, isBroadcaster ){
