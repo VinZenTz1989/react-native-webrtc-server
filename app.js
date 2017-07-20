@@ -59,7 +59,7 @@ setInterval(()=>{
 
 function getObjectKeyFrom(obj, value){
   Object.keys(obj).forEach(function(key){
-    if(obj[key] = value){
+    if(obj[key] === value){
       return key
     }
   })
