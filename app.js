@@ -58,11 +58,13 @@ setInterval(()=>{
 }, 3000)
 
 function getObjectKeyFrom(obj, value){
-  Object.keys(obj).forEach(function(key){
+
+  var keys = Object.keys(obj)
+  for(var i = 0; i < keys.length; i++){
     if(obj[key] === value){
       return key
     }
-  })
+  }
   return 
 } 
 
