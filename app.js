@@ -57,6 +57,15 @@ setInterval(()=>{
   console.log('ROOM LIST', roomList)
 }, 3000)
 
+function getObjectKeyFrom(obj, value){
+  Object.keys(obj).forEach(function(key){
+    if(obj[key] = value){
+      return key
+    }
+  })
+  return 
+} 
+
 io.on("connection", function(socket) {
   console.log("connection");
 
@@ -98,9 +107,19 @@ io.on("connection", function(socket) {
 
     socket.join(name);
     socket.room = name;
+
     if (isBroadcaster) {
+      //Check name duplicate
+      var key = getObjectKeyFrom(roomList, socket.room)
+      if(key){
+        var index = broadcasterIds.indexOf(socket.room)
+        broadcasterIds.splice(index,1)
+        delete roomList[key]
+      }
+
       broadcasterIds.push(socket.id);
       roomList[socket.id] = socket.room;
+    
       io.emit('roomList', roomList);
     }
   });
