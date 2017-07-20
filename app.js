@@ -68,6 +68,7 @@ io.on("connection", function(socket) {
       var isBroadcaster = _.includes(broadcasterIds,socket.id) ? true : false;
 
       if(isBroadcaster){
+        console.log('Broadcaster disconnect')
         var deteleIndex = broadcasterIds.indexOf(socket.id)
         broadcasterIds.splice(deteleIndex,1)
         delete roomList[socket.id]
