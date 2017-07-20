@@ -85,10 +85,15 @@ io.on("connection", function(socket) {
     console.log("join", socket.id);
 
     //get broadcastId in the room by name
-    var broadcastId = socketIdsInRoom(name).filter(function(item) {
-      return _.includes(broadcasterIds, item);
-    });
-    callback(broadcastId); //send broadcastId to client
+    if(!isBroadcaster){
+      var broadcastId = socketIdsInRoom(name).filter(function(item) {
+       return _.includes(broadcasterIds, item);
+      });
+      callback(broadcastId); //send broadcastId to client
+    } else {
+      callback(null)
+    }
+    
 
     socket.join(name);
     socket.room = name;
