@@ -91,7 +91,7 @@ io.on("connection", function(socket) {
 
     if (isBroadcaster) {
       broadcasterIds.push(socket.id);
-      roomList[socket.id] = socket.name
+      roomList[socket.id] = socket.room
       io.emit('roomlist',roomList)
     }
   });
