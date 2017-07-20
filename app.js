@@ -56,7 +56,7 @@ function socketIdsInRoom(name) {
 io.on("connection", function(socket) {
   console.log("connection");
 
-  io.emit('roomList',roomList)
+  io.emit('roomList', roomList)
 
   socket.on("disconnect", function() {
     console.log("disconnect");
@@ -67,7 +67,7 @@ io.on("connection", function(socket) {
         var deteleIndex = broadcasterIds.indexOf(socket.id)
         broadcasterIds.splice(deteleIndex,1)
         delete roomList[socket.id]
-        io.emit('roomlists', roomList)
+        io.emit('roomList', roomList)
       }
 
       var room = socket.room;
@@ -88,11 +88,10 @@ io.on("connection", function(socket) {
 
     socket.join(name);
     socket.room = name;
-
     if (isBroadcaster) {
       broadcasterIds.push(socket.id);
-      roomList[socket.id] = socket.room
-      io.emit('roomlist',roomList)
+      roomList[socket.id] = socket.room;
+      io.emit('roomList', roomList);
     }
   });
 
