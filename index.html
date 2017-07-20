@@ -181,9 +181,7 @@ socket.on('exchange', function(data){
   exchange(data);
 });
 
-socket.on('roomList', function(roomList){
-  console.log('Room list', roomList)
-});
+
 
 socket.on('leave', function(socketId, isBroadcaster ){
   if(isBroadcaster) leave(socketId);
