@@ -116,10 +116,9 @@ io.on("connection", function(socket) {
         broadcasterIds.splice(index,1)
         delete roomList[key]
       }
-
+      //Add new name
       broadcasterIds.push(socket.id);
-      roomList[socket.id] = socket.room;
-    
+      roomList[socket.id] = socket.room;    
       io.emit('roomList', roomList);
     }
   });
@@ -130,5 +129,4 @@ io.on("connection", function(socket) {
     to.emit("exchange", data);
   });
 
-  
 });
