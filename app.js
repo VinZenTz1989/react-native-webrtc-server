@@ -54,8 +54,8 @@ function socketIdsInRoom(name) {
 }
 
 setInterval(()=>{
-  console.log('ROOM LIST', roomList, 10000)
-})
+  console.log('ROOM LIST', roomList)
+}, 3000)
 
 io.on("connection", function(socket) {
   console.log("connection");
