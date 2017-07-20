@@ -61,8 +61,8 @@ function getObjectKeyFrom(obj, value){
 
   var keys = Object.keys(obj)
   for(var i = 0; i < keys.length; i++){
-    if(obj[key] === value){
-      return key
+    if(obj[keys[i]] === value){
+      return keys[i]
     }
   }
   return 
